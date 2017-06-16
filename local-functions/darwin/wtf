@@ -1,0 +1,13 @@
+wtf()
+{   # return/colourize exit status of last command
+    declare code=$?
+
+    case $code in
+        0)  declare col="${colour_true}"  # green (set in colours.bash)
+            ;;
+        *)  declare col="${colour_false}" # red
+            ;;
+    esac
+
+    printf "${col}$code${colour_reset}\n"
+}

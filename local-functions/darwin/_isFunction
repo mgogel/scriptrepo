@@ -1,0 +1,5 @@
+_isFunction()
+{   # exits 0 if $1 is defined as a function
+    builtin declare -f "$1" &>/dev/null
+}
+

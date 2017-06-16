@@ -1,0 +1,17 @@
+
+_t()
+{   # mimic ternary operator -- (expr ? ifTrue : ifFalse)
+    # Usage: _t 'expr' ifTrue ifFalse
+
+    [[ $# -ne 3 ]] && {
+        printf "%s: syntax error\n" $FUNCNAME 2>&1
+        return 1
+    }
+
+    [[ "$1" ]] && {
+        echo "$2"
+    } || {
+        echo "$3"
+    }
+}
+

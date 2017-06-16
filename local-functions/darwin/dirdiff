@@ -1,0 +1,24 @@
+
+# -----------------------------------------------------------------------------
+# file info
+# -----------------------------------------------------------------------------
+
+dirdiff()
+{   # compare and list the contents of two directories
+    # http://osxdaily.com/2012/11/08/compare-contents-of-two-directories-from-the-command-line/
+    if [[ $# -ne 2 ]]; then
+        printf "Usage: %s dir1 dir2\n" $FUNCNAME 1>&2
+        return 1
+    fi
+
+    declare checkDir dir1=$1 dir2=$2
+
+    for checkDir in $dir1 $dir2; do
+        if [[ ! -d $checkDir ]]; then
+            printf "Error: %s is not a directory\n" $checkDir 1>&2
+            return 1
+        fi
+    done
+
+    comm -3 <(command ls -1 "$dir1") <(command ls -1 "$dir2")
+}

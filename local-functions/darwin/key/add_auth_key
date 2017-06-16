@@ -1,0 +1,3 @@
+add_auth_key () {
+    ssh-copy-id $@
+}

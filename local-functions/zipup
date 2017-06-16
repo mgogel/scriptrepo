@@ -1,0 +1,5 @@
+zipup()
+{   # zip an entire folder
+    declare dir="${1%/}"
+    roll "${dir}.zip" "${dir%/}/";
+}

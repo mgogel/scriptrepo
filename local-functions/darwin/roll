@@ -1,0 +1,29 @@
+
+# -----------------------------------------------------------------------------
+# archives
+# -----------------------------------------------------------------------------
+
+roll()
+{   # create a new archive
+    # [source unknown, adapted/modified by me]
+
+    if [[ $# -lt 2 ]]; then
+        printf "Usage: %s archive.ext file1 ...\n" $FUNCNAME 1>&2
+        return 1
+    fi
+
+    declare archive="$1"; shift
+
+    case $archive in
+        *.7z)       7z -mx=9 $archive "$@";;
+        *.jar)      jar cf $archive "$@" ;;
+        *.rar)      rar -m5 -r $archive "$@" ;;
+        *.tar)      tar cf $archive "$@"  ;;
+        *.tar.bz2)  tar cjf $archive "$@" ;;
+        *.tar.gz)   tar czf $archive "$@" ;;
+        *.tgz)      tar czf $archive "$@" ;;
+        *.zip)      zip -9r $archive "$@" ;;
+        *)          printf "%s: Can't make a .%s archive\n" $FUNCNAME ${archive##*.} 1>&2
+                    return 1 ;;
+    esac
+}

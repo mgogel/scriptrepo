@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------------
+# GNU screen
+# -----------------------------------------------------------------------------
+
+newwin()
+{   # open in a new screen window if applicable
+    declare bin="$1"; shift
+    declare -a args=("$@")
+
+    if [[ -n $STY ]]; then
+        screen -t $(basename "$bin") "$bin" "${args[@]}"
+    else
+        "$bin" "$@"
+    fi
+}

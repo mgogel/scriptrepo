@@ -1,0 +1,4 @@
+# bashlogger
+function bashlogger () {
+    script /tmp/log.txt
+}

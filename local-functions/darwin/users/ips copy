@@ -1,0 +1,2 @@
+    # function to show interface IP assignments
+    ips() { foo=`/Users/mark/bin/getip.py; /Users/mark/bin/getip.py en0; /Users/mark/bin/getip.py en1`; echo $foo; }

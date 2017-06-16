@@ -1,0 +1,6 @@
+
+_isGNU()
+{   # exits 0 if $1 uses GNU switches
+    command $1 --version &>/dev/null
+}
+

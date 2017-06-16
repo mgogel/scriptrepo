@@ -1,0 +1,197 @@
+OS X Hints Superguide, Snow Leopard Edition 
+macworld.com/superguides
+
+Page 12
+softwareupdate –d
+
+16
+defaults write -g com.apple.mouse.scaling number
+defaults write -g com.apple.trackpad.scaling number
+
+25
+defaults write com.apple.finder_FXShowPosixPathInTitle -bool YES
+
+29
+mkdir "My Folder"
+cd /Users/yourusername/Documents
+mkdir "My Folder" "My Other Folder" "Not That Folder"
+cat dirlist.txt | xargs mkdir
+mkdir "Project "{A,B,C,D,E,F}
+mkdir "Project "{"New Home","Vacation","To Do"}
+
+35	
+defaults write com.apple.dock persistent-apps-array-add '{tile-data={}; tile-type="spacer-tile";}'
+defaults write com.apple.dock persistent-others-array-add '{tile-data={}; tile-type="spacer-tile";}'
+killall Dock
+
+36	
+defaults write com.apple.dock no-bouncing -bool TRUE
+killall Dock
+defaults write com.apple.dock single-app -bool TRUE
+killall Dock
+defaults delete com.apple.dock single-app
+killall Dock
+defaults write com.apple.dock persistent-others-array-add '{ "tile-data" = { "list-type" = 1; };"tile-type" = "recents-tile"; }’
+killall Dock
+
+40
+defaults write com.apple.finder QLEnableXRayFolders 1
+
+41
+defaults delete com.apple.finder QLEnableXRayFolders
+
+43
+defaults write com.apple.dock workspaces-edge-delay-float 0.5
+killall Dock
+
+48
+defaults write com.apple.dock wvous-show-windows-in-other-spaces -bool FALSE
+killall Dock
+defaults delete com.apple.dock wvous-show-windowsin-other-spaces
+
+57
+defaults write com.apple.Dictionary ProhibitNewWindowForRequest -bool TRUE
+defaults delete com.apple.Dictionary ProhibitNewWindowForRequest
+
+58
+defaults write com.apple.spotlight DictionaryLookupEnabled NO
+defaults write com.apple.spotlight CalculationEnabled NO
+
+59
+cd ~/Library/Preferences
+mdls com.apple.dock.plist | grep kMDItemFSContentChangeDate 
+
+61
+mdfind Shakespeare -onlyin directoryname
+mdfind Shakespeare -count
+
+62
+mdfind -live Shakespeare
+/usr/libexec/locate.updatedb
+mdimport -f directoryname
+mdimport -f /System
+
+63
+sudo mdutil -i on "volumename" 
+sudo mdutil -i off "volumename"
+sudo mdutil -i off /Volumes/Backup
+sudo mdutil -E "volumename"
+
+64
+mdls "file name.txt"
+mdfind "kMDItemAuthorEmailAddresses == '*macworld.com*' " 
+man mdfind
+mdimport –A
+
+68
+defaults write com.apple.ScreenSharing dontWarnOnVNCEncryption -bool TRUE
+defaults write com.apple.ScreenSharing controlObserveQuality 5
+
+70
+sudo networksetup –getmacaddress en0
+networksetup -listallnetworkservices
+sudo networksetup "ethernet 1" -getdnsservers
+sudo networksetup "ethernet 1" -setdnsservers
+
+71
+systemsetup -getcomputersleep
+systemsetup -getdisplaysleep
+
+72
+systemsetup -displaysleep 4
+systemsetup -liststartupdisks
+systemsetup -setstartupdisk
+man systemsetup
+man networksetup
+
+73
+do shell script "cancel -a -"
+display dialog "No more printing jobs" buttons["OK"] default button 1
+
+80
+defaults write com.apple.Safari WebKitOmitPDFSupport -bool YES
+defaults write com.apple.Safari DebugConfirmTossingUnsubmittedFormText 0
+
+85
+defaults write com.apple.Safari IncludeInternalDebugMenu 1
+
+89
+defaults write com.apple.mail PreferPlainText -bool TRUE
+
+97
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool NO
+defaults delete com.apple.mail AddressesIncludeNameOnPasteboard
+
+105
+defaults write com.apple.iCal 'Default duration in minutes for new event' 15
+defaults delete com.apple.iCal 'Default duration in minutes for new event'
+
+107
+defaults write com.apple.iChat EnableDataDetectors 1
+
+126
+defaults write -g WebAutomaticTextReplacementEnabled -bool true
+
+127
+defaults delete -g WebAutomaticTextReplacement Enabled
+
+134
+man screencapture
+
+135
+cd ~/Desktop
+sudo screencapture -ttiff loginwindow.tiff
+screencapture -iwo /pathtosaveimagefileto/image_name.png
+
+136
+defaults write com.apple.screencapture disable-shadow -bool true
+defaults delete com.apple.screencapture disable-shadow
+
+138
+echo
+ls -l
+ls –a
+ls -l –a
+
+139
+man appname
+appname --help
+ls /Users
+ls /usr/bin/s
+cd Sites
+cd ..
+cd /
+cd ~
+pwd
+ditto ~/*doc ~/Desktop/word_docs
+
+140
+man ditto
+ls -l | more
+ls -l ~ > ~/myfiles.txt
+find ~ -name '*.doc' | cpio -o | gzip > 'date+~/%Y%m%d.cpio.gz'
+gzip -d -c YYYYMMDD.cpio.gz | cpio -i -d -r 'filename'
+
+144
+sudo ln /usr/bin/ssh /usr/bin/remote-name
+remote-name -l username remote-name
+/System/Library/CoreServices/backupd.bundle/Contents/Resources/backupd-helper &
+
+145
+diff -rq folder1 folder2
+
+147
+rm ~/Desktop/Report
+
+148
+cp Report2005 ~/Documents/Archives
+cp Report2005 ~/Documents/Archives/Report2005_copy
+rm -i Report2005
+
+149
+\rm file
+set -o noclobber
+
+
+
+

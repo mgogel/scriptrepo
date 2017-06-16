@@ -1,0 +1,3 @@
+function get_ruby_version() {
+  ruby --version | cut -d' ' -f 1-2
+}

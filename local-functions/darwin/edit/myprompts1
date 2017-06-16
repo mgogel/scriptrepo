@@ -1,0 +1,40 @@
+
+# Alt+backspace
+WORDCHARS='*?[]~&;!$%^<>'
+bindkey '\e^h' backward-kill-word
+# Ctrl+W
+unix-word-rubout() {
+    local WORDCHARS='*?/_-.[]~=&;!#$%^(){}<>'
+    zle backward-kill-word
+}
+zle -N unix-word-rubout
+bindkey '^W' unix-word-rubout
+
+function load_compinit_at_first_tab_press() {
+    compinit
+    bindkey '^I' expand-or-complete
+    zle expand-or-complete
+}
+
+zle -N load_compinit_at_first_tab_press
+bindkey '^I' load_compinit_at_first_tab_press
+
+_force_rehash() {
+  (( CURRENT == 1 )) && rehash
+  return 1  # Because we didn't really complete anything
+}
+
+edit-command-output() {
+ BUFFER=$(eval $BUFFER)
+ CURSOR=0
+}
+zle -N edit-command-output
+
+#}}}
+
+#{{{ Testing... Testing...
+#exec 2>>(while read line; do
+#print '\e[91m'${(q)line}'\e[0m' > /dev/tty; done &)
+
+watch=(notme)
+LOGCHECK=0

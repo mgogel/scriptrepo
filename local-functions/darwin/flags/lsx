@@ -1,0 +1,5 @@
+
+lsx()
+{   # list files with a given extension
+    find . -maxdepth 1 -type f -iname '*.'${1}'' -exec ls $flags_ls {} \;
+}

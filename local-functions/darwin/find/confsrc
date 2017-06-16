@@ -1,0 +1,12 @@
+confsrc()
+{
+    declare what file
+
+    for what in "$@"; do
+        file="$dir_config/bash/${what%.bash}.bash"
+        _source "$file" || {
+            printf "%s: couldn't find %s\n" "$FUNCNAME" "${file/$HOME/~}" 1>&2
+            return 1
+        }
+    done
+}

@@ -1,0 +1,10 @@
+function ffind {
+if [ "$2" == "" ] ; then
+        find . -name "$1" -type f | xargs ls -lrt
+else
+        find $1 -name "$2" -type f | xargs ls -lrt
+fi
+}
+
+
+}

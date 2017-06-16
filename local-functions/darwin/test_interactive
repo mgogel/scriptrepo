@@ -1,0 +1,4 @@
+test -n "$INTERACTIVE" -a -n "$LOGIN" && {
+    uname -npsr
+    uptime
+}

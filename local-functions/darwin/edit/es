@@ -1,0 +1,18 @@
+
+es()
+{   # edit a script
+    declare checkDir file
+    for checkDir in "$dir_scripts"{,/dev}; do
+        file="$checkDir/$1.sh"
+        if [[ -f $file ]]; then
+            if [[ -n $SSH_TTY ]]; then
+                newwin "$EDITOR" "$file"
+                return 0
+            else
+                "$VISUAL" "$file" & disown
+                return 0
+            fi
+        fi
+    done
+    return 1
+}

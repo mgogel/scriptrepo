@@ -1,0 +1,2 @@
+# fix slow gvim start
+gvim () { (/usr/bin/gvim -f "$@" &) }

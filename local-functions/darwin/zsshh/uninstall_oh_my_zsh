@@ -1,0 +1,3 @@
+function uninstall_oh_my_zsh() {
+  /usr/bin/env ZSH=$ZSH /bin/sh $ZSH/tools/uninstall.sh
+}

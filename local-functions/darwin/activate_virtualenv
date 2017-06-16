@@ -1,0 +1,8 @@
+activate_virtualenv() {
+    if [ -f env/bin/activate ]; then . env/bin/activate;
+    elif [ -f ../env/bin/activate ]; then . ../env/bin/activate;
+    elif [ -f ../../env/bin/activate ]; then . ../../env/bin/activate;
+    elif [ -f ../../../env/bin/activate ]; then . ../../../env/bin/activate;
+    else echo "Non env found :-(";
+    fi
+}

@@ -1,0 +1,4 @@
+# Build ruby
+function build-ruby() {
+  ruby-build $1 ~/.rubies/$1
+}

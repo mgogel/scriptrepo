@@ -1,0 +1,11 @@
+
+vimhelp()
+{   # load vim's inline help for topic $1
+    declare vimBin
+    vimBin=$(getPath vim) || {
+        printf "$FUNCNAME: can't find vim in \$PATH\n" 1>&2
+        return 1
+    }
+
+    newwin "$vimBin" -c "help $1" -c "only"
+}

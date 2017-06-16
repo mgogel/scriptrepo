@@ -1,0 +1,5 @@
+
+# Which Shell
+shell () {
+  ps | grep `echo $$` | awk '{ print $4 }'
+}

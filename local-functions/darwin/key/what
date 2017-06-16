@@ -1,0 +1,27 @@
+what()
+{   # automatic documentation for shell commands
+    # http://crunchbanglinux.org/forums/post/131229/#p131229
+    declare this="$1"
+
+    case $(type -t "$this") in
+        alias)      builtin type "$this" ;;
+        function)   builtin type "$this" ;;
+        builtin)    help -m "$this" | $PAGER ;;
+        keyword)    help -m "$this" | $PAGER ;;
+        file)       case `file --mime --dereference --brief --preserve-date $(type -p "$this")` in
+                        application/*)
+                            if command man -w "$this" &>/dev/null; then
+                                man "$this"
+                            else
+                                echo "$this: compiled executable or unsupported format"
+                                echo "No man page installed for $this. Try '$this --help' or '-h'."
+                            fi
+                            ;;
+                        *)  file --no-dereference --preserve-date --uncompress "$this"
+                            ;;
+                    esac ;;
+        *)          printf "%s: '%s' not recognized\n" $FUNCNAME "$this" 1>&2
+                    return 1
+                    ;;
+    esac
+}

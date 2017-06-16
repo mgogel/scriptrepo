@@ -1,0 +1,5 @@
+edit-command-output() {
+ BUFFER=$(eval $BUFFER)
+ CURSOR=0
+}
+zle -N edit-command-output

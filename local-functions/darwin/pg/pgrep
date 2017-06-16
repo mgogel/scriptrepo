@@ -1,0 +1,3 @@
+function pgrep() {
+  ps aux | grep $1
+}

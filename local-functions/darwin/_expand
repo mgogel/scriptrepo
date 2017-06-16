@@ -1,0 +1,4 @@
+# override and disable tilde expansion
+_expand() {
+    return 0
+}

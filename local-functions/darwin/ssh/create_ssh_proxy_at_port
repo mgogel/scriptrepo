@@ -1,0 +1,5 @@
+# create SOCKS 5 proxy on local (client) at port {1}
+# Usage: create_ssh_proxy_at_port 9999 mrtux@hdvietnam
+function create_ssh_proxy_at_port () {
+    ssh -f -C2qTnN -D ${1} ${2}
+}

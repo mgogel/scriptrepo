@@ -1,0 +1,51 @@
+
+q()
+{   # exit code tester + wrapper for [[ ... ]]
+    # Usage: q '-d /path/to/dir'
+    #        q '-n $SSH_TTY'
+    #        some_command; q
+
+    declare lastExit="$?" expr pfChanged colour_q qAnswer
+
+    case $# in
+        0)
+            expr="$lastExit -eq 0"
+            ;;
+        1)
+            expr="$@"
+            ;;
+        *)
+            printf "Usage: %s [EXPRESSION]\n'EXPRESSION' uses [[ ... ]] syntax\n" $FUNCNAME 1>&2
+            return 1
+            ;;
+    esac
+
+    # disable pipefail if it's on
+    if [[ $SHELLOPTS =~ "pipefail" ]]; then
+        pfChanged=true
+        set +o pipefail
+    fi
+
+    # check for syntax errors
+    if eval "[[ $expr ]]" 2>&1 | grep error &>/dev/null; then
+        printf "%s: bad expression\n" $FUNCNAME 1>&2
+        [[ -n $pfChanged ]] && set -o pipefail
+        return 1
+    fi
+
+    # finally, test it
+    if eval "[[ $expr ]]"; then
+        qAnswer="true"
+        colour_q="${colour_true}"  # green (set in colours.bash)
+    else
+        qAnswer="false"
+        colour_q="${colour_false}" # red
+    fi
+
+    printf "%b%b%b\n" $colour_q $qAnswer $colour_reset
+
+    # turn pipefail back on if it was
+    [[ -n $pfChanged ]] && set -o pipefail
+
+    return 0
+}

@@ -1,0 +1,15 @@
+
+linkrc()
+{   # link ~/.config/foorc to ~/.foorc
+    declare linkSource="$dir_config/$1" linkTarget="$HOME/.$1"
+
+    [[ $linkSource -ef $linkTarget ]] &&
+        return 0
+
+    [[ -f $linkTarget ]] && {
+        command -p mv -iv "$linkTarget" "$linkTarget.bak~$(date +%Y%m%d).$RANDOM" ||
+            return 1
+    }
+
+    command -p ln -sv "$linkSource" "$linkTarget"
+}

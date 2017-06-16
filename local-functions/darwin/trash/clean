@@ -1,0 +1,9 @@
+# Remove a bunch of files
+function clean() {
+  if [ $# -ne 1 ]; then
+    echo "Usage: clean file-name-to-clean"
+    return 1
+  fi
+
+  find . -name $1 -exec mv \{\} ~/.Trash \;
+}

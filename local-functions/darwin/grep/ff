@@ -1,0 +1,10 @@
+
+ff()
+{   # find a file whose name contains a given string
+    declare scope="$PWD" term="$@"
+
+    find -H "$scope" -type f -iname '*'$term'*' 2>&- |
+    sed "s|^$HOME|~|g" |
+    grep -i "$term"
+}
+

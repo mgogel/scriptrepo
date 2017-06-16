@@ -1,0 +1,12 @@
+function trash() {
+  for item in "$@"; do
+    if [[ -e "$item" ]]; then
+      item_name="$(basename $item)"
+      if [[ -e "${HOME}/.Trash/${item_name}" ]]; then
+        mv -f "$item" "${HOME}/.Trash/${item_name} $(date "+%H-%M-%S")"
+      else
+        mv -f "$item" "${HOME}/.Trash/"
+      fi
+    fi
+  done
+}

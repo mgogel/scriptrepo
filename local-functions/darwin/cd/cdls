@@ -1,0 +1,4 @@
+cdls()
+{   # change to, and immediately list, a directory
+    cd "$@" && ls $flags_ls
+}

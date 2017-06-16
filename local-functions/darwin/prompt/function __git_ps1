@@ -1,0 +1,7 @@
+# MOAR PROMPT
+# with git branch
+# make sure the function exists, even if it wasn't included
+# this is overridden later
+function __git_ps1 {
+exit
+}

@@ -1,0 +1,14 @@
+
+today()
+{   # list all files under $PWD changed today
+    declare findBin=$(getPath find)
+
+    _isGNU "$findBin" || {
+        findBin=$(getPath gfind) || {
+            printf "%s: GNU find(1) required\n" $FUNCNAME
+            return 1
+        }
+    }
+
+    "$findBin" "$PWD" -type f -daystart -mtime 0 -print
+}

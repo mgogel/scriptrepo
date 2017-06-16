@@ -1,0 +1,4 @@
+
+function mysql_stop {
+  mysql.server stop
+}

@@ -1,0 +1,111 @@
+
+vs() {
+    # Guesses which version control system is correct for the current
+    # directory, then executes it with "${@}":
+    #   $ cd hg_repo/
+    #   $ vs version
+    #   Mercurial Distributed SCM
+    #   ...
+    #   $ cd ../git_repo
+    #   $ vs version
+    #   git version 1.8.1.1
+    local vcs
+    vcs="$(vsname)" || {
+        echo "error: not in a VCS repository." >&2
+        return 1
+    }
+    "$vcs" "${@}"
+    return $?
+}
+
+vsname() {
+    # Guesses which version control system is correct for the current
+    # directory:
+    #    $ cd hg_repo/
+    #    $ vsname
+    #    hg
+    #    $ cd ../git_repo
+    #    $ vsname
+    #    git
+    #    $ cd /tmp/
+    #    $ vsname
+    #    $ echo $?
+    #    1
+    local test_vcses=( "hg" "git" )
+    local vcs=""
+    local dir="$PWD"
+    while [[ "$dir" > "/" ]]; do
+        local test_vcs
+        for test_vcs in "${test_vcses[@]}"; do
+            if [[ -d "$dir/.$test_vcs" ]]; then
+                vcs="$test_vcs"
+                break;
+            fi
+        done
+        dir="${dir%/*}"
+    done
+
+    if [[ -z "$vcs" ]]; then
+        return 1
+    fi
+
+    echo "$vcs"
+    return 0
+}
+
+export PATH="$HOME/.bin:$PATH"
+
+
+_pyexpect() {
+    expect -c "
+        spawn -noecho ipython
+        expect \"In \"
+        send \"$*\n\"
+        interact +++ return
+    ";
+}
+
+gitbranch() {
+    export GITBRANCH=""
+
+    local repo="${_GITBRANCH_LAST_REPO-}"
+    local gitdir=""
+    [[ ! -z "$repo" ]] && gitdir="$repo/.git"
+
+    # If we don't have a last seen git repo, or we are in a different directory
+    if [[ -z "$repo" || "$PWD" != "$repo"* || ! -e "$gitdir" ]]; then
+        local cur="$PWD"
+        while [[ ! -z "$cur" ]]; do
+            if [[ -e "$cur/.git" ]]; then
+                repo="$cur"
+                gitdir="$cur/.git"
+                break
+            fi
+            cur="${cur%/*}"
+        done
+    fi
+
+    if [[ -z "$gitdir" ]]; then
+        unset _GITBRANCH_LAST_REPO
+        return 0
+    fi
+    export _GITBRANCH_LAST_REPO="${repo}"
+    local head=""
+    local branch=""
+    read head < "$gitdir/HEAD"
+    case "$head" in
+        ref:*)
+            branch="${head##*/}"
+            ;;
+        "")
+            branch=""
+            ;;
+        *)
+            branch="d:${head:0:7}"
+            ;;
+    esac
+    if [[ -z "$branch" ]]; then
+        return 0
+    fi
+    export GITBRANCH="$branch"
+}

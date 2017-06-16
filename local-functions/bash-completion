@@ -1,0 +1,29 @@
+
+# ----------------------------------------------------------------------
+# BASH COMPLETION
+# ----------------------------------------------------------------------
+
+test -z "$BASH_COMPLETION" && {
+    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+    test -n "$PS1" && test $bmajor -gt 1 && {
+        # search for a bash_completion file to source
+        for f in /usr/local/etc/bash_completion \
+                 /etc/bash_completion
+        do
+            if [ -f $f ]; then
+                . $f
+                break
+            fi
+        done
+    }
+    unset bash bmajor bminor
+}
+
+# Use the color prompt by default when interactive
+# prompt_color
+
+
+
+
+
+

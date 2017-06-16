@@ -1,0 +1,16 @@
+
+    # Remote Umount, unmounts and deletes local folder (experimental, watch you step)
+    rumount() {
+      if [[ $1 == "-a" ]]; then
+        ls -1 ~/mounts/|while read dir
+        do
+          [[ -d $(mount|grep "mounts/$dir") ]] && umount ~/mounts/$dir
+          [[ -d $(ls ~/mounts/$dir) ]] || rm -rf ~/mounts/$dir
+        done
+      else
+        [[ -d $(mount|grep "mounts/$1") ]] && umount ~/mounts/$1
+        [[ -d $(ls ~/mounts/$1) ]] || rm -rf ~/mounts/$1
+      fi
+    }
+
+fi

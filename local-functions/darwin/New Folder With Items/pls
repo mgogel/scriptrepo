@@ -1,0 +1,4 @@
+# Usage: pls [<var>]
+# List path entries of PATH or environment variable <var>.
+pls () {
+ eval echo $${1:-PATH} |tr : 'n'; }

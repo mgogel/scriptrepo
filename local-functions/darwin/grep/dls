@@ -1,0 +1,4 @@
+dls () {
+ # directory LS
+ echo `ls -l | grep "^d" | awk '{ print $9 }' | tr -d "/"`
+}

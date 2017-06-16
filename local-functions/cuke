@@ -1,0 +1,6 @@
+cuke() {
+  local file="$1"
+  shift
+  cucumber "features/$(basename $file)" $@
+}
+compctl -g '*.feature' -W features cuke

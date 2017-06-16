@@ -1,0 +1,8 @@
+function cdp {
+if [ "$1" == "" ] ; then
+        cd $(pwd -P)
+else
+        cd $1
+        cd $(pwd -P)
+fi
+}

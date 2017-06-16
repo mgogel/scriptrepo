@@ -1,0 +1,5 @@
+_inPath()
+{   # exits 0 if $1 is installed in $PATH
+    getPath "$1" &>/dev/null
+}
+

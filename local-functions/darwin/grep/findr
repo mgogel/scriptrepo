@@ -1,0 +1,3 @@
+function findr() {
+  grep -r -n -P --color "$*" *
+}

@@ -1,0 +1,9 @@
+
+div()
+{   # print a bright divider across the terminal
+    declare colour line=" " p="="
+
+    printf -v line '%*s' $COLUMNS
+
+    printf "\n${colour_hi}${line// /$p}${colour_reset}\n\n"
+}

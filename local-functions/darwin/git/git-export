@@ -1,0 +1,11 @@
+# Git
+# exports a git repo to a new project folder
+git-export() {
+  if [ $# -lt 2 ]
+  then
+    echo "Error! Repo and project name required."
+  else
+    git clone --quiet --depth=1 $1 $2
+    rm -rf $2/.git*
+  fi
+}

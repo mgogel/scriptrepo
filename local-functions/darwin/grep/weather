@@ -1,0 +1,11 @@
+
+weather()
+{   # display the current weather (hardcoded to Edmonton)
+    declare url='http://m.weatheroffice.gc.ca/city/pages/ab-50_e.html'
+    declare dumpfile="$(mktemp -t weather.XXXXXXXXXXXX).html"
+    curl -sS -o "$dumpfile" "$url"
+
+    declare cond=$(grep -Eo -m 1 '[[:digit:]]{2}\.gif" alt="[[:alpha:] ]*' "$dumpfile" | sed 's|[[:digit:]]*\.gif" alt="||')
+    declare temp=$(grep -Eo -m 1 '[0-9\.\-]*°C' "$dumpfile" | sed 's/°/°/')
+    printf "%s / %s\n" "$cond" "$temp"
+}

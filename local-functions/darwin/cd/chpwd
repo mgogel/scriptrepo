@@ -1,0 +1,4 @@
+##### cd
+# List files after changing directories
+function chpwd { l }
+# function chpwd() { gls -la --color=auto }

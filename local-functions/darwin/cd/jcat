@@ -1,0 +1,13 @@
+function jcat {
+cp $1 /tmp
+cd /tmp
+jar xvf $1 $2
+cat $2
+rm $1
+cd -
+}
+
+function apt-find {
+apt-cache search $1
+}
+}

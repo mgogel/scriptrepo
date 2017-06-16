@@ -1,0 +1,23 @@
+ -----------------------------------------------------------------------------
+# edit/reload config files
+# -----------------------------------------------------------------------------
+
+confed()
+{   # edit
+    declare file="$dir_config/bash/$1"
+
+    # does the file exist?
+    [[ -f $file ]] ||
+        return 1
+
+    # convert to Windows-style path if necessary
+    [[ $OSTYPE =~ "cygwin" ]] &&
+        file="$(cygpath -aw "$file")"
+
+    # launch the appropriate editor
+    if [[ -n $SSH_TTY ]]; then
+        newwin "$EDITOR" "$file"
+    else
+        "$VISUAL" "$file" & disown
+    fi
+}

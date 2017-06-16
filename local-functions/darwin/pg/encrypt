@@ -1,0 +1,14 @@
+
+encrypt()
+{   # encrypt a file for my own use
+    declare gpgBin=$(getPath gpg) || {
+        printf "$FUNCNAME: can't find GnuPG in \$PATH\n" 1>&2
+        return 1
+    }
+
+    declare inFile="$1"
+    declare outFile="${inFile}.gpg"
+
+    "$gpgBin" --recipient "$EMAIL" --output "$outFile" --encrypt "$inFile" &&
+        echo "$inFile -> $outFile"
+}

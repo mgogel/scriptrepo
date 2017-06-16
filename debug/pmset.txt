@@ -1,0 +1,8 @@
+pmset is invoking all non-blocking -g arguments
+INVOKE: pmset -g history
+Error - no power history found. (IOPMCopyPowerHistory error = 0xe00002bc)
+
+INVOKE: pmset -g historydetailed
+Error reading power management history (0xe00002bc)
+
+

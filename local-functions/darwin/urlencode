@@ -1,0 +1,17 @@
+
+urlencode()
+{   # pure bash URL encoding
+    # http://stackoverflow.com/a/10660730
+    declare c o encoded
+
+    for ((pos=0; pos<${#1}; pos++)); do
+        c=${1:$pos:1}
+        case "$c" in
+            [-_.~a-zA-Z0-9]) o="$c" ;;
+            *)  printf -v o '%%%02x' "'$c" ;;
+        esac
+        encoded+="$o"
+    done
+
+    echo $encoded
+}

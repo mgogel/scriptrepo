@@ -1,0 +1,12 @@
+function z {
+LIMIT=$1
+if [ "$LIMIT" == "" ] ; then
+        LIMIT=1
+fi
+
+P=$PWD
+for ((i=1; i <= LIMIT; i++))
+do
+        P=$P/..
+done
+cd $P

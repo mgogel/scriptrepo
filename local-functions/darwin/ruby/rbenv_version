@@ -1,0 +1,4 @@
+# ruby
+rbenv_version() {
+  echo -n "${$(rbenv version)%% *}"
+}

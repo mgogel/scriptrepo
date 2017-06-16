@@ -1,0 +1,20 @@
+
+# -----------------------------------------------------------------------------
+# text files
+# -----------------------------------------------------------------------------
+
+clip()
+{   # copy a plain text file to the clipboard
+    # adapted from http://brettterpstra.com/2013/01/15/clip-text-file-a-handy-dumb-service/
+    if file "$1" | grep text &>/dev/null; then
+        case $OSTYPE in
+            darwin*)    cat "$@" | /usr/bin/pbcopy ;;
+            cygwin)     cat "$@" > /dev/clipboard  ;;
+            *)          echo "Can't find clipboard"; exit 1 ;;
+        esac
+        echo "Copied '$1' to clipboard"
+    else
+        echo "File $1 is not plain text"
+        exit 1
+    fi
+}

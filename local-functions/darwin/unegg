@@ -1,0 +1,6 @@
+# Cleanup Functions
+unegg () {
+    unzip $1 -d tmp
+    rm $1
+    mv tmp $1
+}

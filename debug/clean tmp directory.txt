@@ -1,0 +1,4 @@
+find ~ $TMPDIR.. \( -flags +sappnd,schg,uappnd,uchg -o ! -user $UID -o ! -perm -600 \) 2>&- | wc -l | pbcopy
+
+
+What are you up to and dictation

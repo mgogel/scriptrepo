@@ -1,0 +1,30 @@
+#!/bin/sh
+curuser=ls -l /dev/console | cut -d " " -f 4
+if [[ ioreg -rd1 -c IOPlatformExpertDevice | grep -i "UUID" | cut -c27-50 != "00000000-0000-1000-8000-" ]]; then macUUID=ioreg -rd1 -c IOPlatformExpertDevice | grep -i "UUID" | cut -c27-62
+fi
+defaults write /Users/$curuser/Library/Preferences/com.apple.screensaver.plist askForPasswordDelay -int 0
+defaults write /Users/$curuser/Library/Preferences/com.apple.screensaver.plist askForPassword -int 1
+rm /Users/$curuser/Library/Preferences/com.apple.screensaver.$macUUID.plist
+rm /Users/$curuser/Library/Preferences/com.apple.ScreenSaverPhotoChooser.$macUUID.plist
+rm /Users/$curuser/Library/Preferences/com.apple.ScreenSaver.iLifeSlideShows.$macUUID.plist
+rm /Users/$curuser/Library/Preferences/ByHost/com.apple.screensaver.$macUUID.plist
+rm /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaverPhotoChooser.$macUUID.plist
+rm /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaver.iLifeSlideShows.$macUUID.plist
+defaults write /Users/$curuser/Library/Preferences/com.apple.screensaver.$macUUID.plist idleTime -string 1200
+defaults write /Users/$curuser/Library/Preferences/com.apple.screensaver.$macUUID.plist CleanExit "YES"
+defaults write /Users/$curuser/Library/Preferences/com.apple.screensaver.$macUUID.plist moduleDict -dict moduleName "iLifeSlideshows" path "/System/Library/Frameworks/ScreenSaver.framework/Resources/iLifeSlideshows.saver" type -int 0
+defaults write /Users/$curuser/Library/Preferences/com.apple.ScreenSaverPhotoChooser.$macUUID.plist identifier "/Users/shared/cbs/"
+defaults write /Users/$curuser/Library/Preferences/com.apple.ScreenSaverPhotoChooser.$macUUID.plist LastViewedPhotoPath ""
+defaults write /Users/$curuser/Library/Preferences/com.apple.ScreenSaverPhotoChooser.$macUUID.plist SelectedFolderPath "/Users/shared/cbs/"
+defaults write /Users/$curuser/Library/Preferences/com.apple.ScreenSaver.iLifeSlideShows.$macUUID.plist styleKey -string Flipup
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.screensaver.$macUUID.plist idleTime -string 1200
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.screensaver.$macUUID.plist CleanExit "YES"
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.screensaver.$macUUID.plist moduleDict -dict moduleName "iLifeSlideshows" path "/System/Library/Frameworks/ScreenSaver.framework/Resources/iLifeSlideshows.saver" type -int 0
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaverPhotoChooser.$macUUID.plist identifier "/Users/shared/cbs/"
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaverPhotoChooser.$macUUID.plist LastViewedPhotoPath ""
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaverPhotoChooser.$macUUID.plist SelectedFolderPath "/Users/shared/cbs/"
+defaults write /Users/$curuser/Library/Preferences/ByHost/com.apple.ScreenSaver.iLifeSlideShows.$macUUID.plist styleKey -string Flipup
+chown -R $curuser:staff /Users/$curuser/Library/Preferences/ByHost/
+chown -R $curuser:staff /Users/$curuser/Library/Preferences/
+killall cfprefsd
+echo $curuser 006 > /tmp/curuser.txt

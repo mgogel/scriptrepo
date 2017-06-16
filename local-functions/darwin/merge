@@ -1,0 +1,9 @@
+# merge pdfs
+merge()
+{
+  tomerge="";
+  for file in "$@"; do
+    tomerge=$tomerge" "$file;
+  done
+  pdftk $tomerge cat output mergd.pdf;
+}

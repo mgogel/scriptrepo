@@ -1,0 +1,7 @@
+function jira() {
+  if [ -n $1 ]
+  then
+    ticket=`echo "$1" | tr '[:lower:]' '[:upper:]'`
+    open https://jira.mongodb.org/browse/`echo $ticket`
+  fi
+}

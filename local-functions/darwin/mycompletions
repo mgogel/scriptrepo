@@ -1,0 +1,14 @@
+
+# load own completion functions
+# fpath=(~/.zsh/completion $fpath)
+
+# load our own completion functions
+# fpath=(~/.aliasd $fpath)
+
+# fpath=($ZSH/functions $fpath)
+
+# autoload -U $ZSH/functions/*(:t)
+
+# load our own aliase functions
+#fpath=(~/.aliases.d/enabled $fpath)
+#######################################

@@ -1,0 +1,8 @@
+fp()
+{   # find and list processes (case-insensitive, partial-match)
+    # http://brettterpstra.com/fk-a-useful-bash-function/
+    command ps Ao pid,comm |
+    awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}' |
+    grep -i "$1" |
+    grep -v grep
+}

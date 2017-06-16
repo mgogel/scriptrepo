@@ -1,0 +1,19 @@
+
+exls()
+{   # list the contents of an archive
+    declare archive
+    for archive in "$@"; do
+        case "$archive" in
+            *.tar*)     tar tf "$archive"  ;;
+            *.7z)       7z l "$archive"    ;;
+            *.jar)      jar tf "$archive"  ;;
+            *.pkg)      pkgutil --payload-files "$archive" ;;
+            *.rar)      unrar vb "$archive"; echo ;;
+            *.tbz2)     tar tf "$archive"  ;;
+            *.tgz)      tar tf "$archive"  ;;
+            *.zip)      zip -sf "$archive" ;;
+            *)          printf "%s: '%s' is not a recognized archive\n" $FUNCNAME "$archive" 1>&2
+                        return 1 ;;
+        esac
+    done
+}

@@ -1,0 +1,6 @@
+
+newpw()
+{   # generate a new password (default length 8 chars)
+    declare n="${1:-8}"
+    echo $(env LC_ALL=C tr -dc '[[:alnum:]][[:punct:]]' < /dev/random | head -c$n)
+}

@@ -1,0 +1,32 @@
+
+ex()
+{   # extract ALL the archives!
+    # [source unknown, adapted/modified by me]
+    declare archive
+    for archive in "$@"; do
+        if [[ -f $archive ]]; then
+            case "$archive" in
+                *.tar.bz2)  tar xjf "$archive" ;;
+                *.tar.gz)   tar xzf "$archive" ;;
+                *.tar.xz)   unxz -ck "$archive" | tar xf - ;;
+                *.7z)       7z x "$archive"    ;;
+                *.bz2)      bunzip2 "$archive" ;;
+                *.gz)       gunzip "$archive"  ;;
+                *.jar)      jar xf "$archive"  ;;
+                *.pkg)      pkgutil --expand "$archive" . ;;
+                *.rar)      unrar x "$archive" ;;
+                *.tar)      tar xf "$archive"  ;;
+                *.tbz2)     tar xjf "$archive" ;;
+                *.tgz)      tar xzf "$archive" ;;
+                *.xz)       unxz -k "$archive" ;;
+                *.Z)        uncompress "$archive" ;;
+                *.zip)      unzip "$archive"   ;;
+                *)          printf "%s: '%s' is not a recognized archive\n" $FUNCNAME "$archive" 1>&2
+                            return 1 ;;
+            esac
+        else
+            printf "%s: '%s' does not exist\n" $FUNCNAME "$archive" 1>&2
+            return 1
+        fi
+    done
+}

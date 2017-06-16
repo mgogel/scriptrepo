@@ -1,0 +1,12 @@
+etym()
+{   # get the etymology of a word <3
+    declare term url maxwidth=80
+
+    for term in "$@"; do
+        url="etymonline.com/index.php?term=$term"
+
+        curl -sS "$url" | grep "<dd "="" |="" sed="" -e="" 's="" <a[^="">]*>\([^<]*\)<[^>]*>/:\1:/g' -e 's/<[^>]*>//g' |
+        fold -sw $(( (COLUMNS < maxwidth) ? COLUMNS : maxwidth )) |
+        recode html..utf-8
+    done
+}

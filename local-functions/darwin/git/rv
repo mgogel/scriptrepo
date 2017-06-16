@@ -1,0 +1,9 @@
+# list remotes with repo URLs
+rv () {
+    local line
+    git remote -v | grep push | sed 's/(.*$//' |
+    while read line;
+    do
+        printf "%-15s %s\n" $line
+    done
+}

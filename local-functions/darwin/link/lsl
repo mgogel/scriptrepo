@@ -1,0 +1,5 @@
+
+lsl()
+{   # list all symbolic links in current dir
+    find . -maxdepth 1 -type l -exec ls $flags_ls {} \;
+}

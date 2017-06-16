@@ -1,0 +1,5 @@
+cd () {
+
+  builtin cd "$@" >/dev/null || return
+  binstubs_hook
+}

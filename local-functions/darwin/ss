@@ -1,0 +1,8 @@
+
+function ss {
+  if [ -e script/server ]; then
+    script/server $@
+  else
+    script/rails server $@
+  fi
+}

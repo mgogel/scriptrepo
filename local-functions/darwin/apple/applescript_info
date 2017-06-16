@@ -1,0 +1,11 @@
+# get info about system via AppleScript
+# Note: this is rather slow - it is faster to run 'system_profiler'
+# Note: to get computer name use:  computer name of (system info)
+applescript_info ()
+{
+    info=$( /usr/bin/osascript <<'    EOT'
+        system info
+    EOT
+    )
+    echo $info
+}

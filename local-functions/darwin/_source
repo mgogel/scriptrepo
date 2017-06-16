@@ -1,0 +1,14 @@
+_source()
+{   # source file(s) if possible, exit 0 if all successfully sourced
+    declare file error
+    for file in "$@"; do
+        if [[ -r $file ]]; then
+            . "$file"
+        else
+            error=true
+        fi
+    done
+
+    [[ -z $error ]] ||
+        return 1
+}

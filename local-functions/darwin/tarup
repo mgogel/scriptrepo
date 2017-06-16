@@ -1,0 +1,6 @@
+
+tarup()
+{   # tar+gzip an entire folder
+    declare dir="${1%/}"
+    roll "${dir}.tar.gz" "${dir%/}/";
+}

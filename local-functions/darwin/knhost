@@ -1,0 +1,4 @@
+## KNIFE
+function knhost() {
+  sed -e 's/.*://' -e 's/.*items found//'
+}

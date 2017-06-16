@@ -1,0 +1,8 @@
+function load_compinit_at_first_tab_press() {
+    compinit
+    bindkey '^I' expand-or-complete
+    zle expand-or-complete
+}
+
+zle -N load_compinit_at_first_tab_press
+bindkey '^I' load_compinit_at_first_tab_press

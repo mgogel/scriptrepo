@@ -1,0 +1,4 @@
+
+function knaws() {
+  knife search node "tags:$*" -a cloud.public_hostname | knhost
+}

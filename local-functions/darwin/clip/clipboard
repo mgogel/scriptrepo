@@ -1,0 +1,11 @@
+# clipboard - put the arguments on the clipboard if we have xsel or xclip
+# Usage : clipboard <something>
+clipboard () {
+    if [ $DISPLAY ]; then
+        { which xsel >/dev/null 2>/dev/null && echo -n "$@" | xsel; } \
+        || { which xclip >/dev/null 2>/dev/null && echo -n "$@" | xclip; } \
+        || echo "Haven't copied to the clipboard: no xsel or xclip" >&2
+    else
+        echo "Haven't copied to the clipboard: no \$DISPLAY" >&2
+    fi
+}
