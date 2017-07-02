@@ -1,0 +1,304 @@
+## LAUNCH BEANSTALK
+
+# To have launchd start beanstalk at login:
+    ln -sfv /usr/local/opt/beanstalk/*.plist ~/Library/LaunchAgents
+#Then to load beanstalk now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.beanstalk.plist
+#Or, if you don't want/need launchctl, you can just run:
+    beanstalkd
+
+
+    ## LAUNCH DNUS
+
+
+ #   If this is your first install, automatically load on login with:
+    mkdir -p ~/Library/LaunchAgents
+    cp /usr/local/Cellar/d-bus/1.8.0/org.freedesktop.dbus-session.plist ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
+
+If this is an upgrade and you already have the org.freedesktop.dbus-session.plist loaded:
+    launchctl unload -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
+    cp /usr/local/Cellar/d-bus/1.8.0/org.freedesktop.dbus-session.plist ~/Library/LaunchAgents/
+    launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
+
+To have launchd start d-bus at login:
+    ln -sfv /usr/local/opt/d-bus/*.plist ~/Library/LaunchAgents
+Then to load d-bus now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.d-bus.plist
+
+
+        ## LAUNCH DNSMASQ
+          cp /usr/local/opt/dnsmasq/dnsmasq.conf.example /usr/local/etc/dnsmasq.conf
+
+To load dnsmasq:
+    sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+
+
+## LAUNCH ELASTICSEARCH
+
+	==> Caveats
+Data:    /usr/local/var/elasticsearch/elasticsearch_mgogel/
+Logs:    /usr/local/var/log/elasticsearch/elasticsearch_mgogel.log
+Plugins: /usr/local/var/lib/elasticsearch/plugins/
+
+To have launchd start elasticsearch at login:
+    ln -sfv /usr/local/opt/elasticsearch/*.plist ~/Library/LaunchAgents
+Then to load elasticsearch now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+Or, if you don't want/need launchctl, you can just run:
+    elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml
+
+## LAUNCH JACK
+
+
+==> Caveats
+To have launchd start jack at login:
+    ln -sfv /usr/local/opt/jack/*.plist ~/Library/LaunchAgents
+Then to load jack now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.jack.plist
+Or, if you don't want/need launchctl, you can just run:
+    jackd -d coreaudio
+
+    ## LAUNCH   JENKINS
+
+    To have launchd start jenkins at login:
+    ln -sfv /usr/local/opt/jenkins/*.plist ~/Library/LaunchAgents
+Then to load jenkins now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.jenkins.plist
+Or, if you don't want/need launchctl, you can just run:
+    java -jar /usr/local/opt/jenkins/libexec/jenkins.war
+
+
+## LAUNCH LIQUIDPROMPT
+Add the following lines to your bash or zsh config (e.g. ~/.bash_profile):
+  if [ -f /usr/local/share/liquidprompt ]; then
+    . /usr/local/share/liquidprompt
+  fi
+
+If you'd like to reconfigure options, you may do so in ~/.liquidpromptrc.
+A sample file you may copy and modify has been installed to
+  /usr/local/share/liquidpromptrc-dist
+
+Don't modify the PROMPT_COMMAND variable elsewhere in your shell config;
+that will break things.
+
+## LAUNCH LOGROTATE
+
+To have launchd start logrotate at login:
+    ln -sfv /usr/local/opt/logrotate/*.plist ~/Library/LaunchAgents
+Then to load logrotate now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.logrotate.plist
+
+    ==> Caveats
+A configuration file is necessary to start mcabber.  The template is here:
+  /usr/local/Cellar/mcabber/0.10.3/share/mcabber/mcabberrc.example
+
+
+  ## LAUNCH MEMCACHE
+
+  To have launchd start memcached at login:
+    ln -sfv /usr/local/opt/memcached/*.plist ~/Library/LaunchAgents
+Then to load memcached now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
+Or, if you don't want/need launchctl, you can just run:
+    /usr/local/opt/memcached/bin/memcached
+
+## LAUNCH MONGODB
+
+    ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+Then to load mongodb now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+Or, if you don't want/need launchctl, you can just run:
+    mongod --config /usr/local/etc/mongod.conf
+
+## LAUNCH MOSQUITTO
+
+
+    => Caveats
+mosquitto has been installed with a default configuration file.
+You can make changes to the configuration by editing:
+    /usr/local/etc/mosquitto/mosquitto.conf
+
+Python client bindings can be installed from the Python Package Index:
+    pip install mosquitto
+
+Javascript client has been removed, see Eclipse Paho for an alternative.
+
+To have launchd start mosquitto at login:
+    ln -sfv /usr/local/opt/mosquitto/*.plist ~/Library/LaunchAgents
+Then to load mosquitto now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mosquitto.plist
+Or, if you don't want/need launchctl, you can just run:
+    mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf
+
+
+
+### LAUNCH MYSQL
+
+A "/etc/my.cnf" from another install may interfere with a Homebrew-built
+server starting up correctly.
+
+To connect:
+    mysql -uroot
+
+To have launchd start mysql at login:
+    ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+Then to load mysql now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+Or, if you don't want/need launchctl, you can just run:
+    mysql.server start
+
+### LAUNCH NGINX
+
+
+    Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+To have launchd start nginx at login:
+    ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents
+Then to load nginx now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+Or, if you don't want/need launchctl, you can just run:
+    nginx
+
+## LAUNCH OFFLINEIMAP
+
+To get started, copy one of these configurations to ~/.offlineimaprc:
+* minimal configuration:
+    cp -n /usr/local/Cellar/offline-imap/6.5.5/offlineimap.conf.minimal ~/.offlineimaprc
+
+* advanced configuration:
+    cp -n /usr/local/Cellar/offline-imap/6.5.5/offlineimap.conf ~/.offlineimaprc
+
+To have launchd start offline-imap at login:
+    ln -sfv /usr/local/opt/offline-imap/*.plist ~/Library/LaunchAgents
+Then to load offline-imap now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
+
+    ## LAUNCH PHP
+
+    To enable PHP in Apache add the following to httpd.conf and restart Apache:
+    LoadModule php5_module    /usr/local/opt/php55/libexec/apache2/libphp5.so
+
+The php.ini file can be found in:
+    /usr/local/etc/php/5.5/php.ini
+
+✩✩✩✩ PEAR ✩✩✩✩
+
+If PEAR complains about permissions, 'fix' the default PEAR permissions and config:
+    chmod -R ug+w /usr/local/Cellar/php55/5.5.12/lib/php
+    pear config-set php_ini /usr/local/etc/php/5.5/php.ini
+
+✩✩✩✩ Extensions ✩✩✩✩
+
+If you are having issues with custom extension compiling, ensure that
+you are using the brew version, by placing /usr/local/bin before /usr/sbin in your PATH:
+
+      PATH="/usr/local/bin:$PATH"
+
+PHP55 Extensions will always be compiled against this PHP. Please install them
+using --without-homebrew-php to enable compiling against system PHP.
+
+✩✩✩✩ PHP CLI ✩✩✩✩
+
+If you wish to swap the PHP you use on the command line, you should add the following to ~/.bashrc,
+~/.zshrc, ~/.profile or your shell's equivalent configuration file:
+
+      export PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
+
+To have launchd start php55 at login:
+    ln -sfv /usr/local/opt/php55/*.plist ~/Library/LaunchAgents
+Then to load php55 now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php55.plist
+
+## LAUNCH  REDIS
+
+To have launchd start redis at login:
+    ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+Then to load redis now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+Or, if you don't want/need launchctl, you can just run:
+    redis-server /usr/local/etc/redis.conf
+
+    ## LAUNCH  SOLR
+    start solr:
+  solr path/to/solr/config/dir
+
+  ## LAUNCH SPHINX
+
+  Sphinx has been compiled with libstemmer support.
+
+Sphinx depends on either MySQL or PostreSQL as a datasource.
+
+You can install these with Homebrew with:
+  brew install mysql
+    For MySQL server.
+
+  brew install mysql-connector-c
+    For MySQL client libraries only.
+
+  brew install postgresql
+    For PostgreSQL server.
+
+    ##LAUNCH ZNC
+To have launchd start ZNC at login:
+    ln -sfv /usr/local/opt/ZNC/*.plist ~/Library/LaunchAgents
+Then to load ZNC now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.ZNC.plist
+Or, if you don't want/need launchctl, you can just run:
+    znc --foreground
+##LAUNCH     SIP
+The sip-dir for Python is /usr/local/share/sip.
+
+
+##LAUNCH POSTGRES
+
+To have launchd start postgresql at login:
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+Then to load postgresql now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+Or, if you don't want/need launchctl, you can just run:
+    postgres -D /usr/local/var/postgres
+
+##LAUNCH ISC-DHCP
+This install of dhcpd expects config files to be in /usr/local/etc.
+All state files (leases and pids) are stored in /usr/local/var/dhcpd.
+
+Dhcpd needs to run as root since it listens on privileged ports.
+
+There are two plists because a single dhcpd process may do either
+DHCPv4 or DHCPv6 but not both. Use one or both as needed.
+
+Note that you must create the appropriate config files before starting
+the services or dhcpd will refuse to run.
+  DHCPv4: /usr/local/etc/dhcpd.conf
+  DHCPv6: /usr/local/etc/dhcpd6.conf
+
+Sample config files may be found in /usr/local/etc.
+
+To have launchd start isc-dhcp at startup:
+    sudo cp -fv /usr/local/opt/isc-dhcp/*.plist /Library/LaunchDaemons
+Then to load isc-dhcp now:
+    sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.isc-dhcp.plist
+
+
+##LAUNCH BIND
+==> Caveats
+To have launchd start bind at startup:
+    sudo cp -fv /usr/local/opt/bind/*.plist /Library/LaunchDaemons
+Then to load bind now:
+    sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.bind.plist
+
+##LAUNCH CCCACHE
+    To install symlinks for compilers that will automatically use
+ccache, prepend this directory to your PATH:
+  /usr/local/opt/ccache/libexec
+  
+
+
+##LAUNCH
+
+
+##LAUNCH
